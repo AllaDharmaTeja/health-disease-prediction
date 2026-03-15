@@ -5,7 +5,10 @@ import os
 
 app = Flask(__name__)
 
+# Load model
 model = pickle.load(open("model.pkl", "rb"))
+
+# Load dataset to get symptoms list
 data = pd.read_csv("dataset/Testing.csv")
 symptoms = data.columns[:-1]
 
@@ -16,7 +19,7 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
 
-    input_data = [0]*len(symptoms)
+    input_data = [0] * len(symptoms)
 
     selected = request.form.getlist("symptom")
 
